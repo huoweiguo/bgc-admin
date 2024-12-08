@@ -1,0 +1,54 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+.page-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgba(24,24,28,1);
+  height: 40px;
+  color: #fff;
+}
+.page__container {
+  background-color: rgba(24,24,28,1);
+  margin: 20px;
+  padding: 20px;
+  border-radius: 5px;
+}
+.el-table {
+  background-color: rgba(24,24,28,1) !important;
+}
+.el-form-item__label {
+  color: #fff !important;
+}
+.el-input__wrapper {
+  background-color: transparent !important;
+}
+.el-table tr {
+  background-color: transparent !important;
+}
+.el-table th.el-table__cell {
+  background-color: transparent !important;
+}
+.page__footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+.bgc__container .el-descriptions__title{
+  color: #fff !important;
+}
+.bgc__container .el-descriptions__body {
+  background-color: transparent !important;
+}
+
+.bgc__container .el-descriptions__label.el-descriptions__cell.is-bordered-label {
+  background-color: transparent !important;
+  color: #fff !important;
+  font-weight: bold;
+}
+
+.bgc__container .el-descriptions__content.el-descriptions__cell.is-bordered-content {
+  color: #fff !important;
+}
