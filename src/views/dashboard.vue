@@ -1,5 +1,5 @@
 <template>
-  <div id="container" class="continer">
+  <div id="container" class="container">
     <div class="dashboard__nav">
       <span class="nav__left"></span>
       百果厨大数据平台
@@ -7,44 +7,96 @@
     </div>
     <div class="nav__line"></div>
 
-    <!--dashborad left-->
-    <div class="dashboard__left">
-      <div class="dashboard__left__section">
-        <div class="dashboard__left__section__title">合作店铺分布情况</div>
-        <div class="shops__map__count">
-          <h2><span>全国合作店铺数量: </span>1120家</h2>
-          <div class="shops__map__charts"></div>
-        </div>
-      </div>
-
-      <div class="dashboard__left__section">
-        <div class="dashboard__left__section__title">
-          <span>店铺销售额排名</span>
-          <a>查看更多&gt;</a>
-        </div>
-        <div class="dashboard__left__table">
-          <div class="dashboard__left__table__header">
-            <span>排名</span>
-            <span>店铺名称</span>
-            <span>销售额</span>
+    <div class="container__box">
+      <!--dashborad left-->
+      <div class="dashboard__left">
+        <div class="dashboard__left__section">
+          <div class="dashboard__left__section__title">合作店铺分布情况</div>
+          <div class="shops__map__count">
+            <h2><span>全国合作店铺数量: </span>1120家</h2>
+            <div class="shops__map__charts"></div>
           </div>
-          <div class="dashboard__left__table__body">
-            <div class="dashboard__left__table__body__item" v-for="(item, index) in shopsList" :key="index">
-              <span><i :class="{ 'active': index < 3 }">{{ index + 1 }}</i></span>
-              <span>{{ item.name }}</span>
-              <span>{{ item.value }}元</span>
+        </div>
+
+        <div class="dashboard__left__section">
+          <div class="dashboard__left__section__title">
+            <span>店铺销售额排名</span>
+            <a>查看更多&gt;</a>
+          </div>
+          <div class="dashboard__left__table">
+            <div class="dashboard__left__table__header">
+              <span>排名</span>
+              <span>店铺名称</span>
+              <span>销售额</span>
+            </div>
+            <div class="dashboard__left__table__body">
+              <div class="dashboard__left__table__body__item" v-for="(item, index) in shopsList" :key="index">
+                <span><i :class="{ 'active': index < 3 }">{{ index + 1 }}</i></span>
+                <span>{{ item.name }}</span>
+                <span>{{ item.value }}元</span>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <div class="dashboard__center">
-      <el-statistic title="总成交额" :value="totalCount" />
-    </div>
+      <div class="dashboard__center">
+        <div class="dashboard__center__box">
+          <div class="dashboard__center__title">全店累计交易总额</div>
+          <div class="dashboard__count">
+            <el-statistic title="" :value="totalCount" />.
+            <span>05<i>元</i></span>
+          </div>
+          <div class="dashboard__center__trade">
+            <div>
+              今日交易额：&yen;
+              <el-statistic :value="todayTrade" /><span>.05</span>
+              <span class="green ml10" title="较昨日">
+                24%
+                <el-icon>
+                  <Top />
+                  <!-- <Bottom /> -->
+                </el-icon>
+              </span>
+            </div>
+            <div>昨日交易额：&yen;<el-statistic :value="yesterdayTrade" /><span>.38</span></div>
+          </div>
+        </div>
+      </div>
 
-    <!--dashborad right-->
-    <div class="dashboard__right"></div>
+      <!--dashborad right-->
+      <div class="dashboard__right">
+        <!--order statictis-->
+        <div class="right__section__order mb10">
+          <div class="section__order__item">
+            <b>50</b>
+            <span>当日新增店铺</span>
+          </div>
+          <div class="section__order__item">
+            <b>265</b>
+            <span>当日活跃店铺</span>
+          </div>
+          <div class="section__order__item">
+            <b>158</b>
+            <span>认证店铺数</span>
+          </div>
+        </div>
+        <div class="right__section__order">
+          <div class="section__order__item">
+            <b>128</b>
+            <span>生成小程序数</span>
+          </div>
+          <div class="section__order__item">
+            <b>128</b>
+            <span>累计开通多门店（家）</span>
+          </div>
+          <div class="section__order__item">
+            <b>12825.50</b>
+            <span>累计多门店费用</span>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -53,16 +105,19 @@ import * as echarts from 'echarts';
 import { getRandomColor } from '@/utils/tools.ts';
 import { onMounted, ref } from 'vue'
 import { useTransition } from '@vueuse/core'
+import { Top, Bottom } from '@element-plus/icons-vue'
 
-const source = ref(172000.05)
+const source = ref(17200012541.05)
+const yesterdayTrade = ref(2548761.38)
+const todayTrade = ref(5412543.05)
 const totalCount = useTransition(source, {
-  duration: 800,
+  duration: 2500,
 })
 
 
 setInterval(() => {
   source.value = source.value + 123.45
-}, 3000)
+}, 10000)
 
 const initCharts = () => {
   const myChart = echarts.init(document.querySelector('.shops__map__charts') as HTMLElement);
@@ -136,11 +191,11 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
-.continer {
+.container {
   padding: 0px;
   margin: 0px;
   width: 100%;
-  min-width: 1200px;
+  min-width: 1400px;
   height: 100vh;
   background-color: rgba(1, 11, 63, 1);
 
@@ -191,6 +246,11 @@ onMounted(() => {
         background-image: linear-gradient(to right, rgb(1, 106, 178), rgb(1, 11, 63));
       }
     }
+  }
+
+  .container__box {
+    display: flex;
+    justify-content: space-between;
   }
 
   .nav__line {
@@ -348,7 +408,7 @@ onMounted(() => {
                 font-style: normal;
 
                 &.active {
-                  background-color: rgba(237, 96, 4, 1);
+                  background-color: rgb(245, 154, 35);
                 }
               }
             }
@@ -359,10 +419,96 @@ onMounted(() => {
 
   }
 
+  .dashboard__center {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    left: 0;
+    top: 106px;
+    width: 100%;
+    min-width: 1400px;
+    text-align: center;
+
+    .dashboard__center__box {
+      width: 480px;
+      height: 135px;
+      padding: 20px;
+      background-color: rgba(21, 36, 113, 0.3);
+
+      .dashboard__count {
+        margin-bottom: 10px;
+
+        span {
+          i {
+            font-size: 16px;
+            color: #fff;
+            background-color: transparent !important;
+            align-self: baseline;
+            font-style: normal;
+            margin-left: 5px;
+          }
+        }
+      }
+
+      .dashboard__center__trade {
+        display: flex;
+        justify-content: space-between;
+        font-size: 15px;
+        color: #fff;
+
+        &>div {
+          display: flex;
+          align-items: baseline;
+          font-size: 13px;
+
+          span {
+            color: rgb(245, 154, 35);
+          }
+
+          .green {
+            display: flex;
+            color: green;
+            align-items: flex-end;
+          }
+        }
+      }
+    }
+  }
+
   .dashboard__right {
     width: 25%;
     margin-top: 20px;
     margin-right: 20px;
+
+    .right__section__order {
+      display: flex;
+      justify-content: space-between;
+      overflow: hidden;
+
+      .section__order__item {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        width: 32%;
+        float: left;
+        background-color: rgba(21, 36, 113, 0.3);
+        color: #fff;
+        padding: 13px 0;
+        font-size: 14px;
+
+        b {
+          background: linear-gradient(to bottom, rgb(0, 213, 254), rgb(0, 118, 254));
+          /* 裁剪背景到文字 */
+          -webkit-background-clip: text;
+          background-clip: text;
+          /* 使文字颜色透明，显示背景 */
+          -webkit-text-fill-color: transparent;
+          text-fill-color: transparent;
+          font-size: 20px;
+          margin: 5px 0;
+        }
+      }
+    }
   }
 }
 </style>

@@ -52,3 +52,51 @@
 .bgc__container .el-descriptions__content.el-descriptions__cell.is-bordered-content {
   color: #fff !important;
 }
+
+.dashboard__center .el-statistic__head {
+  color: #fff;
+  font-size: 24px;
+  margin-bottom: 30px;
+}
+.dashboard__center__title {
+  color: #fff;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+.dashboard__count {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 50px;
+  color: #fff;
+  background: linear-gradient(to bottom, rgb(0, 213, 254), rgb(0, 118, 254));
+  /* 裁剪背景到文字 */
+  -webkit-background-clip: text;
+  background-clip: text;
+  /* 使文字颜色透明，显示背景 */
+  -webkit-text-fill-color: transparent;
+  text-fill-color: transparent;
+}
+.dashboard__center .el-statistic__number {
+  font-size: 50px;
+}
+
+.dashboard__count .el-statistic {
+  display: flex;
+  align-items: center;
+}
+
+.dashboard__center__trade .el-statistic__number {
+  font-size: 20px;
+  color: rgb(245, 154, 35);
+  font-weight: bold;
+  margin: 0 0 0 5px;
+}
+
+.ml10 {
+  margin-left: 10px;
+}
+.mb10 {
+  margin-bottom: 10px;
+}
